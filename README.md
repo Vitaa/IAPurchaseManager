@@ -1,5 +1,5 @@
 # IAPurchaseManager
-Swift iOS In-App Purchase Manager 
+Swift In-App Purchase Manager for iOS 
 
 Easy-to-use a singleton class that supports non-renewable in-app purchases. 
 It's super cool because</br>
