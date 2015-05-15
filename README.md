@@ -6,7 +6,12 @@ It's super cool because</br>
 1) it's written in Swift</br>
 2) it uses blocks!
 
-If you want to <b>make a purchase</b>, all you need to do is to call a method:
+<h2>Setup</h2>
+Just drag <b>IAPManager.swift</b> to your project.
+
+<h2>Making a purchase</h2>
+
+If you want to make a purchase, all you need to do is to call a method:
 ```swift
   IAPManager.sharedManager.purchaseProductWithId(productId) { (error) -> Void in 
     if error == nil {
@@ -17,16 +22,21 @@ If you want to <b>make a purchase</b>, all you need to do is to call a method:
 }
 ```
 
-Also you can <b>restore transactions</b>:
-```swift
-  IAPManager.sharedManager.restoreCompletedTransactions { (error) -> Void in }
-```
+You can call <b>purchaseProductWithId</b> without first loading products info because inside purchaseProductWithId it'll load it if needed. So just call <b>purchaseProductWithId</b> whenever you want to make a purchase. 
 
-or <b>load products info</b>:
+But if you need to get all products info, you can load it by calling:
 ```swift
   IAPManager.sharedManager.loadProductsWithIds(productIds) { (error) -> Void in }
 ```
 
+<h2>Restore transactions</h2>
+
+To restore transactions call:
+```swift
+  IAPManager.sharedManager.restoreCompletedTransactions { (error) -> Void in }
+```
+
+<h2>Details</h2>
 All completed transactions are saved to a file:
 ```swift
 data.writeToFile(purchasedItemsFilePath(), options: .AtomicWrite | .DataWritingFileProtectionComplete, error: &error)
