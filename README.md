@@ -9,6 +9,10 @@ It's super cool because</br>
 <h2>Setup</h2>
 Just drag <b>IAPManager.swift</b> to your project.
 
+<b>or</b> using <a href="https://cocoapods.org">CocoaPods</a>
+```
+pod 'IAPurchaseManager'
+```
 <h2>Making a purchase</h2>
 
 If you want to make a purchase, all you need to do is to call a method:
