@@ -8,14 +8,14 @@
 import Foundation
 import StoreKit
 
-typealias RestoreTransactionsCompletionBlock = NSError? -> Void
-typealias LoadProductsCompletionBlock = (Array<SKProduct>?, NSError?) -> Void
-typealias PurchaseProductCompletionBlock = (NSError?) -> Void
-typealias LoadProductsRequestInfo = (request: SKProductsRequest, completion: LoadProductsCompletionBlock)
-typealias PurchaseProductRequestInfo = (productId: String, completion: PurchaseProductCompletionBlock)
+public typealias RestoreTransactionsCompletionBlock = NSError? -> Void
+public typealias LoadProductsCompletionBlock = (Array<SKProduct>?, NSError?) -> Void
+public typealias PurchaseProductCompletionBlock = (NSError?) -> Void
+public typealias LoadProductsRequestInfo = (request: SKProductsRequest, completion: LoadProductsCompletionBlock)
+public typealias PurchaseProductRequestInfo = (productId: String, completion: PurchaseProductCompletionBlock)
 
-class IAPManager: NSObject {
-    static let sharedManager = IAPManager()
+public class IAPManager: NSObject {
+    public static let sharedManager = IAPManager()
     
     override init() {
         super.init()
@@ -27,7 +27,7 @@ class IAPManager: NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("savePurchasedItems"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
     }
     
-    func canMakePayments() -> Bool {
+    public func canMakePayments() -> Bool {
         if SKPaymentQueue.canMakePayments() {
             // check connection
             let hostname = "appstore.com"
@@ -37,16 +37,16 @@ class IAPManager: NSObject {
         return false
     }
     
-    func isProductPurchased(productId: String) -> Bool {
+    public func isProductPurchased(productId: String) -> Bool {
         return purchasedProductIds.contains(productId)
     }
     
-    func restoreCompletedTransactions(completion: RestoreTransactionsCompletionBlock) {
+    public func restoreCompletedTransactions(completion: RestoreTransactionsCompletionBlock) {
         restoreTransactionsCompletionBlock = completion
         SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
     }
     
-    func loadProductsWithIds(productIds: Array<String>, completion:LoadProductsCompletionBlock) {
+    public func loadProductsWithIds(productIds: Array<String>, completion:LoadProductsCompletionBlock) {
         var loadedProducts = Array<SKProduct>()
         var remainingIds = Array<String>()
         
@@ -68,7 +68,7 @@ class IAPManager: NSObject {
         request.start()
     }
     
-    func purchaseProductWithId(productId: String, completion: PurchaseProductCompletionBlock) {
+    public func purchaseProductWithId(productId: String, completion: PurchaseProductCompletionBlock) {
         if !canMakePayments() {
             let error = NSError(domain: "inapppurchase", code: 0, userInfo: [NSLocalizedDescriptionKey: "In App Purchasing is unavailable"])
             completion(error)
@@ -85,7 +85,7 @@ class IAPManager: NSObject {
         }
     }
     
-    func purchaseProduct(product: SKProduct, completion: PurchaseProductCompletionBlock) {
+    public func purchaseProduct(product: SKProduct, completion: PurchaseProductCompletionBlock) {
         purchaseProductRequests.append(PurchaseProductRequestInfo(productId: product.productIdentifier, completion: completion))
         let payment = SKPayment(product: product)
         SKPaymentQueue.defaultQueue().addPayment(payment)
@@ -126,7 +126,7 @@ class IAPManager: NSObject {
 }
 
 extension IAPManager: SKProductsRequestDelegate {
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
         for product in response.products {
             availableProducts[product.productIdentifier] = product
         }
@@ -134,7 +134,7 @@ extension IAPManager: SKProductsRequestDelegate {
         callLoadProductsCompletionForRequest(request, responseProducts: response.products, error: nil)
     }
     
-    func request(request: SKRequest, didFailWithError error: NSError) {
+    public func request(request: SKRequest, didFailWithError error: NSError) {
         if let productRequest = request as? SKProductsRequest {
             callLoadProductsCompletionForRequest(productRequest, responseProducts: nil, error: error)
         }
@@ -143,7 +143,7 @@ extension IAPManager: SKProductsRequestDelegate {
 
 extension IAPManager: SKPaymentTransactionObserver {
     
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             let productId = transaction.payment.productIdentifier
             switch transaction.transactionState {
@@ -164,13 +164,13 @@ extension IAPManager: SKPaymentTransactionObserver {
         }
     }
     
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
+    public func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
         if let completion = restoreTransactionsCompletionBlock {
             completion(nil)
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
+    public func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
         if let completion = restoreTransactionsCompletionBlock {
             completion(error)
         }
