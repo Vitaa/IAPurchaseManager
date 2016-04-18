@@ -33,6 +33,13 @@ But if you need to get all products info, you can load it by calling:
   IAPManager.sharedManager.loadProductsWithIds(productIds) { (error) -> Void in }
 ```
 
+<h2>Check product was purchased</h2>
+
+To check if a product was purchased, call (it returns Bool):
+```swift
+  IAPManager.sharedManager.isProductPurchased(productId)
+```
+
 <h2>Restore transactions</h2>
 
 To restore transactions call:
