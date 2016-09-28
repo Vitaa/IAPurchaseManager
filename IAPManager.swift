@@ -8,196 +8,196 @@
 import Foundation
 import StoreKit
 
-public typealias RestoreTransactionsCompletionBlock = NSError? -> Void
+public typealias RestoreTransactionsCompletionBlock = (NSError?) -> Void
 public typealias LoadProductsCompletionBlock = (Array<SKProduct>?, NSError?) -> Void
 public typealias PurchaseProductCompletionBlock = (NSError?) -> Void
 public typealias LoadProductsRequestInfo = (request: SKProductsRequest, completion: LoadProductsCompletionBlock)
 public typealias PurchaseProductRequestInfo = (productId: String, completion: PurchaseProductCompletionBlock)
 
-public class IAPManager: NSObject {
-    public static let sharedManager = IAPManager()
+open class IAPManager: NSObject {
+  open static let sharedManager = IAPManager()
+  
+  override init() {
+    super.init()
     
-    override init() {
-        super.init()
-        
-        restorePurchasedItems()
-        
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("savePurchasedItems"), name: UIApplicationDidEnterBackgroundNotification, object: nil)
+    restorePurchasedItems()
+    
+    SKPaymentQueue.default().add(self)
+    
+    NotificationCenter.default.addObserver(self, selector: #selector(IAPManager.savePurchasedItems), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+  }
+  
+  open func canMakePayments() -> Bool {
+    if SKPaymentQueue.canMakePayments() {
+      // check connection
+      let hostname = "appstore.com"
+      let hostinfo = gethostbyname(hostname)
+      return hostinfo != nil
+    }
+    return false
+  }
+  
+  open func isProductPurchased(_ productId: String) -> Bool {
+    return purchasedProductIds.contains(productId)
+  }
+  
+  open func restoreCompletedTransactions(_ completion: @escaping RestoreTransactionsCompletionBlock) {
+    restoreTransactionsCompletionBlock = completion
+    SKPaymentQueue.default().restoreCompletedTransactions()
+  }
+  
+  open func loadProductsWithIds(_ productIds: Array<String>, completion:@escaping LoadProductsCompletionBlock) {
+    var loadedProducts = Array<SKProduct>()
+    var remainingIds = Array<String>()
+    
+    for productId in productIds {
+      if let product = availableProducts[productId] {
+        loadedProducts.append(product)
+      } else {
+        remainingIds.append(productId)
+      }
     }
     
-    public func canMakePayments() -> Bool {
-        if SKPaymentQueue.canMakePayments() {
-            // check connection
-            let hostname = "appstore.com"
-            let hostinfo = gethostbyname(hostname)
-            return hostinfo != nil
-        }
-        return false
+    if remainingIds.count == 0 {
+      completion(loadedProducts, nil)
     }
     
-    public func isProductPurchased(productId: String) -> Bool {
-        return purchasedProductIds.contains(productId)
-    }
-    
-    public func restoreCompletedTransactions(completion: RestoreTransactionsCompletionBlock) {
-        restoreTransactionsCompletionBlock = completion
-        SKPaymentQueue.defaultQueue().restoreCompletedTransactions()
-    }
-    
-    public func loadProductsWithIds(productIds: Array<String>, completion:LoadProductsCompletionBlock) {
-        var loadedProducts = Array<SKProduct>()
-        var remainingIds = Array<String>()
-        
-        for productId in productIds {
-            if let product = availableProducts[productId] {
-                loadedProducts.append(product)
-            } else {
-                remainingIds.append(productId)
-            }
-        }
-        
-        if remainingIds.count == 0 {
-            completion(loadedProducts, nil)
-        }
-        
-        let request = SKProductsRequest(productIdentifiers: Set(remainingIds))
-        request.delegate = self
-        loadProductsRequests.append(LoadProductsRequestInfo(request: request, completion: completion))
-        request.start()
-    }
-    
-    public func purchaseProductWithId(productId: String, completion: PurchaseProductCompletionBlock) {
-        if !canMakePayments() {
-            let error = NSError(domain: "inapppurchase", code: 0, userInfo: [NSLocalizedDescriptionKey: "In App Purchasing is unavailable"])
-            completion(error)
+    let request = SKProductsRequest(productIdentifiers: Set(remainingIds))
+    request.delegate = self
+    loadProductsRequests.append(LoadProductsRequestInfo(request: request, completion: completion))
+    request.start()
+  }
+  
+  open func purchaseProductWithId(_ productId: String, completion: @escaping PurchaseProductCompletionBlock) {
+    if !canMakePayments() {
+      let error = NSError(domain: "inapppurchase", code: 0, userInfo: [NSLocalizedDescriptionKey: "In App Purchasing is unavailable"])
+      completion(error)
+    } else {
+      loadProductsWithIds([productId]) { (products, error) -> Void in
+        if error != nil {
+          completion(error)
         } else {
-            loadProductsWithIds([productId]) { (products, error) -> Void in
-                if error != nil {
-                    completion(error)
-                } else {
-                    if let product = products?.first {
-                        self.purchaseProduct(product, completion: completion)
-                    }
-                }
-            }
+          if let product = products?.first {
+            self.purchaseProduct(product, completion: completion)
+          }
         }
+      }
     }
-    
-    public func purchaseProduct(product: SKProduct, completion: PurchaseProductCompletionBlock) {
-        purchaseProductRequests.append(PurchaseProductRequestInfo(productId: product.productIdentifier, completion: completion))
-        let payment = SKPayment(product: product)
-        SKPaymentQueue.defaultQueue().addPayment(payment)
-    }
-    
-    private func callLoadProductsCompletionForRequest(request: SKProductsRequest, responseProducts:Array<SKProduct>?, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            for i in 0..<self.loadProductsRequests.count {
-                let requestInfo = self.loadProductsRequests[i]
-                if requestInfo.request == request {
-                    self.loadProductsRequests.removeAtIndex(i)
-                    requestInfo.completion(responseProducts, error)
-                    return
-                }
-            }
+  }
+  
+  open func purchaseProduct(_ product: SKProduct, completion: @escaping PurchaseProductCompletionBlock) {
+    purchaseProductRequests.append(PurchaseProductRequestInfo(productId: product.productIdentifier, completion: completion))
+    let payment = SKPayment(product: product)
+    SKPaymentQueue.default().add(payment)
+  }
+  
+  fileprivate func callLoadProductsCompletionForRequest(_ request: SKProductsRequest, responseProducts:Array<SKProduct>?, error: NSError?) {
+    DispatchQueue.main.async {
+      for i in 0..<self.loadProductsRequests.count {
+        let requestInfo = self.loadProductsRequests[i]
+        if requestInfo.request == request {
+          self.loadProductsRequests.remove(at: i)
+          requestInfo.completion(responseProducts, error)
+          return
         }
+      }
     }
-    
-    private func callPurchaseProductCompletionForProduct(productId: String, error: NSError?) {
-        dispatch_async(dispatch_get_main_queue()) {
-            for i in 0..<self.purchaseProductRequests.count {
-                let requestInfo = self.purchaseProductRequests[i]
-                if requestInfo.productId == productId {
-                    self.purchaseProductRequests.removeAtIndex(i)
-                    requestInfo.completion(error)
-                    return
-                }
-            }
+  }
+  
+  fileprivate func callPurchaseProductCompletionForProduct(_ productId: String, error: NSError?) {
+    DispatchQueue.main.async {
+      for i in 0..<self.purchaseProductRequests.count {
+        let requestInfo = self.purchaseProductRequests[i]
+        if requestInfo.productId == productId {
+          self.purchaseProductRequests.remove(at: i)
+          requestInfo.completion(error)
+          return
         }
+      }
     }
-    
-    private var availableProducts = Dictionary<String, SKProduct>()
-    private var purchasedProductIds = Array<String>()
-    private var restoreTransactionsCompletionBlock: RestoreTransactionsCompletionBlock?
-    private var loadProductsRequests = Array<LoadProductsRequestInfo>()
-    private var purchaseProductRequests = Array<PurchaseProductRequestInfo>()
-    
+  }
+  
+  fileprivate var availableProducts = Dictionary<String, SKProduct>()
+  fileprivate var purchasedProductIds = Array<String>()
+  fileprivate var restoreTransactionsCompletionBlock: RestoreTransactionsCompletionBlock?
+  fileprivate var loadProductsRequests = Array<LoadProductsRequestInfo>()
+  fileprivate var purchaseProductRequests = Array<PurchaseProductRequestInfo>()
+  
 }
 
 extension IAPManager: SKProductsRequestDelegate {
-    public func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
-        for product in response.products {
-            availableProducts[product.productIdentifier] = product
-        }
-        
-        callLoadProductsCompletionForRequest(request, responseProducts: response.products, error: nil)
+  public func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+    for product in response.products {
+      availableProducts[product.productIdentifier] = product
     }
     
-    public func request(request: SKRequest, didFailWithError error: NSError) {
-        if let productRequest = request as? SKProductsRequest {
-            callLoadProductsCompletionForRequest(productRequest, responseProducts: nil, error: error)
-        }
+    callLoadProductsCompletionForRequest(request, responseProducts: response.products, error: nil)
+  }
+  
+  public func request(_ request: SKRequest, didFailWithError error: Error) {
+    if let productRequest = request as? SKProductsRequest {
+      callLoadProductsCompletionForRequest(productRequest, responseProducts: nil, error: error as NSError?)
     }
+  }
 }
 
 extension IAPManager: SKPaymentTransactionObserver {
-    
-    public func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
-        for transaction in transactions {
-            let productId = transaction.payment.productIdentifier
-            switch transaction.transactionState {
-            case .Restored: fallthrough
-            case .Purchased:
-                purchasedProductIds.append(productId)
-                savePurchasedItems()
-                
-                callPurchaseProductCompletionForProduct(productId, error: nil)
-                queue.finishTransaction(transaction)
-            case .Failed:
-                callPurchaseProductCompletionForProduct(productId, error: transaction.error)
-                queue.finishTransaction(transaction)
-            case .Purchasing:
-                print("Purchasing \(productId)...")
-            default: break
-            }
-        }
+  
+  public func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    for transaction in transactions {
+      let productId = transaction.payment.productIdentifier
+      switch transaction.transactionState {
+      case .restored: fallthrough
+      case .purchased:
+        purchasedProductIds.append(productId)
+        savePurchasedItems()
+        
+        callPurchaseProductCompletionForProduct(productId, error: nil)
+        queue.finishTransaction(transaction)
+      case .failed:
+        callPurchaseProductCompletionForProduct(productId, error: transaction.error as NSError?)
+        queue.finishTransaction(transaction)
+      case .purchasing:
+        print("Purchasing \(productId)...")
+      default: break
+      }
     }
-    
-    public func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
-        if let completion = restoreTransactionsCompletionBlock {
-            completion(nil)
-        }
+  }
+  
+  public func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
+    if let completion = restoreTransactionsCompletionBlock {
+      completion(nil)
     }
-    
-    public func paymentQueue(queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: NSError) {
-        if let completion = restoreTransactionsCompletionBlock {
-            completion(error)
-        }
+  }
+  
+  public func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
+    if let completion = restoreTransactionsCompletionBlock {
+      completion(error as NSError?)
     }
+  }
 }
 
 extension IAPManager { // Store file managment
-    
-    func purchasedItemsFilePath() -> String {
-        let documentsDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
-        return  (NSURL(string: documentsDirectory)?.URLByAppendingPathComponent("purchased.plist").path)!
+  
+  func purchasedItemsFilePath() -> String {
+    let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
+    return  (URL(string: documentsDirectory)?.appendingPathComponent("purchased.plist").path)!
+  }
+  
+  func restorePurchasedItems()  {
+    if let items = NSKeyedUnarchiver.unarchiveObject(withFile: purchasedItemsFilePath()) as? Array<String> {
+      purchasedProductIds.append(contentsOf: items)
     }
-    
-    func restorePurchasedItems()  {
-        if let items = NSKeyedUnarchiver.unarchiveObjectWithFile(purchasedItemsFilePath()) as? Array<String> {
-            purchasedProductIds.appendContentsOf(items)
-        }
+  }
+  
+  func savePurchasedItems() {
+    let data = NSKeyedArchiver.archivedData(withRootObject: purchasedProductIds)
+    var error: NSError?
+    do {
+      try data.write(to: URL(fileURLWithPath: purchasedItemsFilePath()), options: [.atomicWrite, .completeFileProtection])
+    } catch let error1 as NSError {
+      error = error1
+      print("Failed to save purchased items: \(error)")
     }
-    
-    func savePurchasedItems() {
-        let data = NSKeyedArchiver.archivedDataWithRootObject(purchasedProductIds)
-        var error: NSError?
-        do {
-            try data.writeToFile(purchasedItemsFilePath(), options: [.AtomicWrite, .DataWritingFileProtectionComplete])
-        } catch let error1 as NSError {
-            error = error1
-            print("Failed to save purchased items: \(error)")
-        }
-    }
+  }
 }
