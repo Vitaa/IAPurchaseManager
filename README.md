@@ -3,7 +3,7 @@ Swift In-App Purchase Manager for iOS
 
 Easy-to-use a singleton class that supports non-renewable in-app purchases. 
 It's super cool because</br>
-1) it's written in Swift</br>
+1) it's written in Swift 3</br>
 2) it uses blocks!
 
 <h2>Setup</h2>
@@ -13,6 +13,12 @@ Just drag <b>IAPManager.swift</b> to your project.
 ```
 pod 'IAPurchaseManager'
 ```
+
+If you are using Swift 2.x, then
+```
+pod 'IAPurchaseManager', '~> 0.0.2'
+```
+
 <h2>Making a purchase</h2>
 
 If you want to make a purchase, all you need to do is to call a method:
