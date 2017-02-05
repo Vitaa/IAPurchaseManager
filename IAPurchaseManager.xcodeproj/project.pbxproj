@@ -15,7 +15,7 @@
 		589CA74B1E47C35F0033CE2C /* IAPurchaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IAPurchaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		589CA74E1E47C35F0033CE2C /* IAPurchaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAPurchaseManager.h; sourceTree = "<group>"; };
 		589CA74F1E47C35F0033CE2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		589CA7561E47C3700033CE2C /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../../../IAPManagerTest/Carthage/Checkouts/IAPurchaseManager/IAPManager.swift; sourceTree = "<group>"; };
+		589CA7561E47C3700033CE2C /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../IAPManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +299,7 @@
 				589CA7551E47C35F0033CE2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
