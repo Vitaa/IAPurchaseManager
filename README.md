@@ -3,7 +3,7 @@ Swift In-App Purchase Manager for iOS
 
 Easy-to-use a singleton class that supports non-renewable in-app purchases. 
 It's super cool because</br>
-1) it's written in Swift</br>
+1) it's written in Swift 3</br>
 2) it uses blocks!
 
 <h2>Setup</h2>
@@ -13,11 +13,17 @@ Just drag <b>IAPManager.swift</b> to your project.
 ```
 pod 'IAPurchaseManager'
 ```
+
+If you are using Swift 2.x, then
+```
+pod 'IAPurchaseManager', '~> 0.0.2'
+```
+
 <h2>Making a purchase</h2>
 
 If you want to make a purchase, all you need to do is to call a method:
 ```swift
-  IAPManager.sharedManager.purchaseProductWithId(productId) { (error) -> Void in 
+  IAPManager.shared.purchaseProduct(productId: productId) { (error) -> Void in 
     if error == nil {
       // successful purchase!
     } else {
@@ -30,27 +36,27 @@ You can call <b>purchaseProductWithId</b> without first loading products info be
 
 But if you need to get all products info, you can load it by calling:
 ```swift
-  IAPManager.sharedManager.loadProductsWithIds(productIds) { (error) -> Void in }
+  IAPManager.shared.loadProducts(productIds: []) { (products, error) in }
 ```
 
 <h2>Check product was purchased</h2>
 
 To check if a product was purchased, call (it returns Bool):
 ```swift
-  IAPManager.sharedManager.isProductPurchased(productId)
+  IAPManager.shared.isProductPurchased(productId)
 ```
 
 <h2>Restore transactions</h2>
 
 To restore transactions call:
 ```swift
-  IAPManager.sharedManager.restoreCompletedTransactions { (error) -> Void in }
+  IAPManager.shared.restoreCompletedTransactions { (error) in }
 ```
 
 <h2>Details</h2>
 All completed transactions are saved to a file:
 ```swift
-data.writeToFile(purchasedItemsFilePath(), options: .AtomicWrite | .DataWritingFileProtectionComplete, error: &error)
+data.write(to: purchasedItemsURL(), options: [.atomicWrite, .completeFileProtection])
 ```
 
 </br>
