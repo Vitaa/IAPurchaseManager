@@ -30,7 +30,7 @@
 		58D4F22A1E47BB9100FC9B4E = {
 			isa = PBXGroup;
 			children = (
-				58D4F2361E47BB9100FC9B4E /* IAPManager */,
+				58D4F2361E47BB9100FC9B4E /* IAPurchaseManager */,
 				58D4F2351E47BB9100FC9B4E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,13 +43,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		58D4F2361E47BB9100FC9B4E /* IAPManager */ = {
+		58D4F2361E47BB9100FC9B4E /* IAPurchaseManager */ = {
 			isa = PBXGroup;
 			children = (
 				58D4F23F1E47BBB900FC9B4E /* IAPManager.swift */,
 				58D4F2381E47BB9100FC9B4E /* Info.plist */,
 			);
-			path = IAPManager;
+			path = IAPurchaseManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,7 +246,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = IAPManager/Info.plist;
+				INFOPLIST_FILE = IAPurchaseManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPManager;
@@ -266,7 +266,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = IAPManager/Info.plist;
+				INFOPLIST_FILE = IAPurchaseManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPManager;
