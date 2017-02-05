@@ -11,7 +11,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		58D4F2341E47BB9100FC9B4E /* IAPManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IAPManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IAPurchaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		58D4F2381E47BB9100FC9B4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58D4F23F1E47BBB900FC9B4E /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../../IAPManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -38,7 +38,7 @@
 		58D4F2351E47BB9100FC9B4E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58D4F2341E47BB9100FC9B4E /* IAPManager.framework */,
+				58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,9 +65,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		58D4F2331E47BB9100FC9B4E /* IAPManager */ = {
+		58D4F2331E47BB9100FC9B4E /* IAPurchaseManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPManager" */;
+			buildConfigurationList = 58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */;
 			buildPhases = (
 				58D4F22F1E47BB9100FC9B4E /* Sources */,
 				58D4F2301E47BB9100FC9B4E /* Frameworks */,
@@ -78,9 +78,9 @@
 			);
 			dependencies = (
 			);
-			name = IAPManager;
+			name = IAPurchaseManager;
 			productName = IAPManager;
-			productReference = 58D4F2341E47BB9100FC9B4E /* IAPManager.framework */;
+			productReference = 58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -99,7 +99,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPManager" */;
+			buildConfigurationList = 58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPurchaseManager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -111,7 +111,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58D4F2331E47BB9100FC9B4E /* IAPManager */,
+				58D4F2331E47BB9100FC9B4E /* IAPurchaseManager */,
 			);
 		};
 /* End PBXProject section */
@@ -279,7 +279,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPManager" */ = {
+		58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPurchaseManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58D4F23A1E47BB9100FC9B4E /* Debug */,
@@ -288,7 +288,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPManager" */ = {
+		58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				58D4F23D1E47BB9100FC9B4E /* Debug */,

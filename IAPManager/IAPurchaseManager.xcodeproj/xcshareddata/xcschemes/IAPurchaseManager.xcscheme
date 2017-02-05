@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
-               BuildableName = "IAPManager.framework"
-               BlueprintName = "IAPManager"
-               ReferencedContainer = "container:IAPManager.xcodeproj">
+               BuildableName = "IAPurchaseManager.framework"
+               BlueprintName = "IAPurchaseManager"
+               ReferencedContainer = "container:IAPurchaseManager.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
-            BuildableName = "IAPManager.framework"
-            BlueprintName = "IAPManager"
-            ReferencedContainer = "container:IAPManager.xcodeproj">
+            BuildableName = "IAPurchaseManager.framework"
+            BlueprintName = "IAPurchaseManager"
+            ReferencedContainer = "container:IAPurchaseManager.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
-            BuildableName = "IAPManager.framework"
-            BlueprintName = "IAPManager"
-            ReferencedContainer = "container:IAPManager.xcodeproj">
+            BuildableName = "IAPurchaseManager.framework"
+            BlueprintName = "IAPurchaseManager"
+            ReferencedContainer = "container:IAPurchaseManager.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
