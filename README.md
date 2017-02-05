@@ -6,19 +6,6 @@ It's super cool because</br>
 1) it's written in Swift 3</br>
 2) it uses blocks!
 
-<h2>Setup</h2>
-Just drag <b>IAPManager.swift</b> to your project.
-
-<b>or</b> using <a href="https://cocoapods.org">CocoaPods</a>
-```
-pod 'IAPurchaseManager'
-```
-
-If you are using Swift 2.x, then
-```
-pod 'IAPurchaseManager', '~> 0.0.2'
-```
-
 <h2>Making a purchase</h2>
 
 If you want to make a purchase, all you need to do is to call a method:
@@ -57,6 +44,23 @@ To restore transactions call:
 All completed transactions are saved to a file:
 ```swift
 data.write(to: purchasedItemsURL(), options: [.atomicWrite, .completeFileProtection])
+```
+
+<h2>Setup</h2> 
+Just drag <b>IAPManager.swift</b> to your project.
+
+<b>or</b> using <a href="https://cocoapods.org">CocoaPods</a>
+```
+pod 'IAPurchaseManager'
+```
+
+If you are using Swift 2.x, then
+```
+pod 'IAPurchaseManager', '~> 0.0.2'
+```
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+```
+github "Vitaa/IAPurchaseManager"
 ```
 
 </br>
