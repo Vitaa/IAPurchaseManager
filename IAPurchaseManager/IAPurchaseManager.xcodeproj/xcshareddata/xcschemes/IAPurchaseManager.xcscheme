@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
+               BlueprintIdentifier = "589CA74A1E47C35F0033CE2C"
                BuildableName = "IAPurchaseManager.framework"
                BlueprintName = "IAPurchaseManager"
                ReferencedContainer = "container:IAPurchaseManager.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
+            BlueprintIdentifier = "589CA74A1E47C35F0033CE2C"
             BuildableName = "IAPurchaseManager.framework"
             BlueprintName = "IAPurchaseManager"
             ReferencedContainer = "container:IAPurchaseManager.xcodeproj">
@@ -63,7 +63,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "58D4F2331E47BB9100FC9B4E"
+            BlueprintIdentifier = "589CA74A1E47C35F0033CE2C"
             BuildableName = "IAPurchaseManager.framework"
             BlueprintName = "IAPurchaseManager"
             ReferencedContainer = "container:IAPurchaseManager.xcodeproj">

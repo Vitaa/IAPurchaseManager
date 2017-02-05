@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		58D4F2401E47BBB900FC9B4E /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D4F23F1E47BBB900FC9B4E /* IAPManager.swift */; };
+		589CA7501E47C35F0033CE2C /* IAPurchaseManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 589CA74E1E47C35F0033CE2C /* IAPurchaseManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		589CA7571E47C3700033CE2C /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589CA7561E47C3700033CE2C /* IAPManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IAPurchaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		58D4F2381E47BB9100FC9B4E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		58D4F23F1E47BBB900FC9B4E /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../../IAPManager.swift; sourceTree = "<group>"; };
+		589CA74B1E47C35F0033CE2C /* IAPurchaseManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IAPurchaseManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		589CA74E1E47C35F0033CE2C /* IAPurchaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAPurchaseManager.h; sourceTree = "<group>"; };
+		589CA74F1E47C35F0033CE2C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		589CA7561E47C3700033CE2C /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IAPManager.swift; path = ../../../IAPManagerTest/Carthage/Checkouts/IAPurchaseManager/IAPManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		58D4F2301E47BB9100FC9B4E /* Frameworks */ = {
+		589CA7471E47C35F0033CE2C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -27,27 +29,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58D4F22A1E47BB9100FC9B4E = {
+		589CA7411E47C35F0033CE2C = {
 			isa = PBXGroup;
 			children = (
-				58D4F2361E47BB9100FC9B4E /* IAPurchaseManager */,
-				58D4F2351E47BB9100FC9B4E /* Products */,
+				589CA74D1E47C35F0033CE2C /* IAPurchaseManager */,
+				589CA74C1E47C35F0033CE2C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		58D4F2351E47BB9100FC9B4E /* Products */ = {
+		589CA74C1E47C35F0033CE2C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */,
+				589CA74B1E47C35F0033CE2C /* IAPurchaseManager.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		58D4F2361E47BB9100FC9B4E /* IAPurchaseManager */ = {
+		589CA74D1E47C35F0033CE2C /* IAPurchaseManager */ = {
 			isa = PBXGroup;
 			children = (
-				58D4F23F1E47BBB900FC9B4E /* IAPManager.swift */,
-				58D4F2381E47BB9100FC9B4E /* Info.plist */,
+				589CA7561E47C3700033CE2C /* IAPManager.swift */,
+				589CA74E1E47C35F0033CE2C /* IAPurchaseManager.h */,
+				589CA74F1E47C35F0033CE2C /* Info.plist */,
 			);
 			path = IAPurchaseManager;
 			sourceTree = "<group>";
@@ -55,69 +58,70 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		58D4F2311E47BB9100FC9B4E /* Headers */ = {
+		589CA7481E47C35F0033CE2C /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				589CA7501E47C35F0033CE2C /* IAPurchaseManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		58D4F2331E47BB9100FC9B4E /* IAPurchaseManager */ = {
+		589CA74A1E47C35F0033CE2C /* IAPurchaseManager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */;
+			buildConfigurationList = 589CA7531E47C35F0033CE2C /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */;
 			buildPhases = (
-				58D4F22F1E47BB9100FC9B4E /* Sources */,
-				58D4F2301E47BB9100FC9B4E /* Frameworks */,
-				58D4F2311E47BB9100FC9B4E /* Headers */,
-				58D4F2321E47BB9100FC9B4E /* Resources */,
+				589CA7461E47C35F0033CE2C /* Sources */,
+				589CA7471E47C35F0033CE2C /* Frameworks */,
+				589CA7481E47C35F0033CE2C /* Headers */,
+				589CA7491E47C35F0033CE2C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = IAPurchaseManager;
-			productName = IAPManager;
-			productReference = 58D4F2341E47BB9100FC9B4E /* IAPurchaseManager.framework */;
+			productName = IAPurchaseManager;
+			productReference = 589CA74B1E47C35F0033CE2C /* IAPurchaseManager.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		58D4F22B1E47BB9100FC9B4E /* Project object */ = {
+		589CA7421E47C35F0033CE2C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Vitaliya Solomina";
 				TargetAttributes = {
-					58D4F2331E47BB9100FC9B4E = {
+					589CA74A1E47C35F0033CE2C = {
 						CreatedOnToolsVersion = 8.2.1;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPurchaseManager" */;
+			buildConfigurationList = 589CA7451E47C35F0033CE2C /* Build configuration list for PBXProject "IAPurchaseManager" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 58D4F22A1E47BB9100FC9B4E;
-			productRefGroup = 58D4F2351E47BB9100FC9B4E /* Products */;
+			mainGroup = 589CA7411E47C35F0033CE2C;
+			productRefGroup = 589CA74C1E47C35F0033CE2C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				58D4F2331E47BB9100FC9B4E /* IAPurchaseManager */,
+				589CA74A1E47C35F0033CE2C /* IAPurchaseManager */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		58D4F2321E47BB9100FC9B4E /* Resources */ = {
+		589CA7491E47C35F0033CE2C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,18 +131,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		58D4F22F1E47BB9100FC9B4E /* Sources */ = {
+		589CA7461E47C35F0033CE2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D4F2401E47BBB900FC9B4E /* IAPManager.swift in Sources */,
+				589CA7571E47C3700033CE2C /* IAPManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		58D4F23A1E47BB9100FC9B4E /* Debug */ = {
+		589CA7511E47C35F0033CE2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -191,7 +195,7 @@
 			};
 			name = Debug;
 		};
-		58D4F23B1E47BB9100FC9B4E /* Release */ = {
+		589CA7521E47C35F0033CE2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -237,7 +241,7 @@
 			};
 			name = Release;
 		};
-		58D4F23D1E47BB9100FC9B4E /* Debug */ = {
+		589CA7541E47C35F0033CE2C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -249,7 +253,7 @@
 				INFOPLIST_FILE = IAPurchaseManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPManager;
+				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPurchaseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -257,7 +261,7 @@
 			};
 			name = Debug;
 		};
-		58D4F23E1E47BB9100FC9B4E /* Release */ = {
+		589CA7551E47C35F0033CE2C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
@@ -269,7 +273,7 @@
 				INFOPLIST_FILE = IAPurchaseManager/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPManager;
+				PRODUCT_BUNDLE_IDENTIFIER = vitaa.IAPurchaseManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -279,25 +283,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		58D4F22E1E47BB9100FC9B4E /* Build configuration list for PBXProject "IAPurchaseManager" */ = {
+		589CA7451E47C35F0033CE2C /* Build configuration list for PBXProject "IAPurchaseManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				58D4F23A1E47BB9100FC9B4E /* Debug */,
-				58D4F23B1E47BB9100FC9B4E /* Release */,
+				589CA7511E47C35F0033CE2C /* Debug */,
+				589CA7521E47C35F0033CE2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		58D4F23C1E47BB9100FC9B4E /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */ = {
+		589CA7531E47C35F0033CE2C /* Build configuration list for PBXNativeTarget "IAPurchaseManager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				58D4F23D1E47BB9100FC9B4E /* Debug */,
-				58D4F23E1E47BB9100FC9B4E /* Release */,
+				589CA7541E47C35F0033CE2C /* Debug */,
+				589CA7551E47C35F0033CE2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 58D4F22B1E47BB9100FC9B4E /* Project object */;
+	rootObject = 589CA7421E47C35F0033CE2C /* Project object */;
 }
