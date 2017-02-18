@@ -182,7 +182,7 @@ extension IAPManager { // Store file managment
     
     func purchasedItemsURL() -> URL {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
-        return URL(string: documentsDirectory)!.appendingPathComponent("purchased.plist")
+        return URL(fileURLWithPath: documentsDirectory).appendingPathComponent("purchased.plist")
     }
     
     func purchasedItemsFilePath() -> String {
