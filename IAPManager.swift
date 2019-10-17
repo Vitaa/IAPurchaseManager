@@ -60,12 +60,12 @@ public class IAPManager: NSObject {
         
         if remainingIds.count == 0 {
             completion(loadedProducts, nil)
+        } else {
+            let request = SKProductsRequest(productIdentifiers: Set(remainingIds))
+            request.delegate = self
+            loadProductsRequests.append(LoadProductsRequestInfo(request: request, completion: completion))
+            request.start()
         }
-        
-        let request = SKProductsRequest(productIdentifiers: Set(remainingIds))
-        request.delegate = self
-        loadProductsRequests.append(LoadProductsRequestInfo(request: request, completion: completion))
-        request.start()
     }
     
     public func purchaseProduct(productId: String, completion: @escaping PurchaseProductCompletionBlock) {
