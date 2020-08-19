@@ -3,7 +3,7 @@ Swift In-App Purchase Manager for iOS
 
 Easy-to-use a singleton class that supports non-renewable in-app purchases. 
 It's super cool because</br>
-1) it's written in Swift 4.2</br>
+1) it's written in Swift</br>
 2) it uses blocks!
 
 <h2>Making a purchase</h2>
