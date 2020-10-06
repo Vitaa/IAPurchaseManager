@@ -25,6 +25,14 @@ public class IAPManager: NSObject {
         SKPaymentQueue.default().add(self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(IAPManager.savePurchasedItems), name: UIApplication.didEnterBackgroundNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.willTerminateNotification,
+            object: nil,
+            queue: nil) { _ in
+            SKPaymentQueue.default().remove(self)
+        }
+        
     }
     
     public func canMakePayments() -> Bool {
