@@ -180,25 +180,27 @@ extension IAPManager: SKPaymentTransactionObserver {
 
 extension IAPManager { // Store file management
     
-    func purchasedItemsURL() -> URL {
-        let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!
+    func purchasedItemsURL() -> URL? {
+        guard let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first else { return nil }
         return URL(fileURLWithPath: documentsDirectory).appendingPathComponent("purchased.plist")
     }
     
-    func purchasedItemsFilePath() -> String {
-        return purchasedItemsURL().path
+    func purchasedItemsFilePath() -> String? {
+        return purchasedItemsURL()?.path
     }
     
     func restorePurchasedItems()  {
-        if let items = NSKeyedUnarchiver.unarchiveObject(withFile: purchasedItemsFilePath()) as? Array<String> {
+        guard let filePath = purchasedItemsFilePath() else { return }
+        if let items = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Array<String> {
             purchasedProductIds.append(contentsOf: items)
         }
     }
     
     @objc func savePurchasedItems() {
+        guard let fileURL = purchasedItemsURL() else { return }
         let data = NSKeyedArchiver.archivedData(withRootObject: purchasedProductIds)
         do {
-            try data.write(to: purchasedItemsURL(), options: [.atomicWrite, .completeFileProtection])
+            try data.write(to: fileURL, options: [.atomicWrite, .completeFileProtection])
         } catch {
             print("Failed to save purchased items: \(error)")
         }
