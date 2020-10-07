@@ -193,21 +193,27 @@ extension IAPManager { // Store file management
         return URL(fileURLWithPath: documentsDirectory).appendingPathComponent("purchased.plist")
     }
     
-    func purchasedItemsFilePath() -> String? {
-        return purchasedItemsURL()?.path
-    }
-    
     func restorePurchasedItems()  {
-        guard let filePath = purchasedItemsFilePath() else { return }
-        if let items = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? Array<String> {
-            purchasedProductIds.append(contentsOf: items)
+        do {
+            guard let fileURL = purchasedItemsURL() else { return }
+            let fileData = try Data(contentsOf: fileURL)
+            if let items = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSArray.self, from: fileData) {
+                for item in items {
+                    guard let itemString = item as? String,
+                          itemString.count <= 100 // App Store Connect limits iAP IDs to 100 chars
+                        else { continue }
+                    purchasedProductIds.append(itemString)
+                }
+            }
+        } catch {
+            print("Failed to save restore purchased items: \(error)")
         }
     }
     
     @objc func savePurchasedItems() {
         guard let fileURL = purchasedItemsURL() else { return }
-        let data = NSKeyedArchiver.archivedData(withRootObject: purchasedProductIds)
         do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: purchasedProductIds, requiringSecureCoding: true)
             try data.write(to: fileURL, options: [.atomicWrite, .completeFileProtection])
         } catch {
             print("Failed to save purchased items: \(error)")
