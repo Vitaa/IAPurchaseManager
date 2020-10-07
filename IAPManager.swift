@@ -148,6 +148,11 @@ extension IAPManager: SKProductsRequestDelegate {
             callLoadProductsCompletion(request: productRequest, responseProducts: nil, error: error)
         }
     }
+    
+    public func paymentQueue(_ queue: SKPaymentQueue, didRevokeEntitlementsForProductIdentifiers productIdentifiers: [String]) {
+        purchasedProductIds.removeAll { productIdentifiers.contains($0) }
+        savePurchasedItems()
+    }
 }
 
 extension IAPManager: SKPaymentTransactionObserver {
