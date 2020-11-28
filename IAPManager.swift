@@ -211,7 +211,12 @@ extension IAPManager { // Store file management
                 }
             }
         } catch {
-            print("Failed to save restore purchased items: \(error)")
+            // Ignore file does not exist errors
+            let nsError = error as NSError
+            if nsError.domain == NSCocoaErrorDomain && nsError.code == NSFileReadNoSuchFileError {
+                return
+            }
+            print("Failed to load saved purchased items: \(error)")
         }
     }
     
