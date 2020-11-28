@@ -15,7 +15,7 @@ public typealias LoadProductsRequestInfo = (request: SKProductsRequest, completi
 public typealias PurchaseProductRequestInfo = (productId: String, completion: PurchaseProductCompletionBlock)
 
 public class IAPManager: NSObject {
-    public static let shared = IAPManager()
+    @objc public static let shared = IAPManager()
     
     override init() {
         super.init()
