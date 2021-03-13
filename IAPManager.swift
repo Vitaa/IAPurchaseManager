@@ -194,7 +194,7 @@ extension IAPManager: SKPaymentTransactionObserver {
 extension IAPManager { // Store file management
     
     func purchasedItemsURL() -> URL? {
-        guard let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first else { return nil }
+        guard let documentsDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first else { return nil }
         return URL(fileURLWithPath: documentsDirectory).appendingPathComponent("purchased.plist")
     }
     
